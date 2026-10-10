@@ -193,6 +193,12 @@ Models
   :class:`~django.db.models.functions.Trunc` database functions determines the
   treatment of nonexistent and ambiguous datetimes.
 
+* ``QuerySet.delete()`` and ``Model.delete()`` now only fetch the fields
+  referenced by other models' foreign keys when collecting related objects for
+  cascade deletion, unless ``pre_delete`` or ``post_delete`` signals are
+  connected for the related model. This makes deletion faster and avoids
+  decoding columns that are never used.
+
 Requests and Responses
 ~~~~~~~~~~~~~~~~~~~~~~
 
